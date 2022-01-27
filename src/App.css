@@ -17,3 +17,8 @@ nav {
   color: white;
   margin: 20px 20px 20px 0px;
 }
+
+.delete-btn {
+  background: none;
+  border: none;
+}
