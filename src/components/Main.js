@@ -14,16 +14,16 @@ export default function Main() {
         localStorage.setItem(taskStorageKey, JSON.stringify(tasks))
     }, [tasks])
 
-    function addTask() {
-        console.log(tasks)
-        //localStorage.setItem(taskStorageKey, event.target.value)
+    function addTask(event) {
+        event.preventDefault()
+        
         setTasks(oldTasks => ([
-            ...oldTasks,
             {
                 id: nanoid(),
                 title: newTask,
                 isDone: false
-            }
+            },
+            ...oldTasks
         ]))
     }
 
@@ -36,10 +36,19 @@ export default function Main() {
             const newArray = []
             for (let i = 0; i < oldTasks.length; i++) {
                 const oldTask = oldTasks[i]
+
                 if (oldTask.id === currentTaskId) {
-                    newArray.unshift({ ...oldTask, isDone: !oldTask.isDone })
+                    if (!oldTask.isDone) {
+                        newArray.push({ ...oldTask, isDone: true })
+                    } else {
+                        newArray.unshift({ ...oldTask, isDone: false })
+                    }
                 } else {
-                    newArray.push(oldTask)
+                    if (oldTask.isDone) {
+                        newArray.push(oldTask)
+                    } else {
+                        newArray.unshift(oldTask)
+                    }
                 }
             }
             return newArray
@@ -62,16 +71,36 @@ export default function Main() {
             />
         )
     })
-
     return (
-        <main>
-            <div className="form">
-                <input type="text" placeholder="Task" name="newTask" onChange={handleChange} value={newTask} />
-                <button onClick={addTask}>Add task</button>
+        <main className="container py-5 h-100">
+            <div className="row d-flex justify-content-center align-items-center h-100">
+                <div className="col col-xl-10">
+
+                    <div className="card">
+                        <div className="card-body p-5">
+
+                            <form className="d-flex justify-content-center align-items-center mb-4">
+                                <input type="text" className="form-control form-control-lg"
+                                    placeholder="What do you need to do today?" name="newTask" onChange={handleChange} value={newTask} />
+
+                                <button onClick={addTask} className="btn btn-primary btn-lg ms-2">Add</button>
+                            </form>
+
+                            <h6 className="mb-3">Just do it!</h6>
+
+                            {TaskElements.length !== 0 ?
+                                <ul className="list-group mb-0">
+                                    {TaskElements}
+                                </ul>
+                                :
+                                "Nothing for today..."
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            {TaskElements}
-
-
         </main>
     )
 }
