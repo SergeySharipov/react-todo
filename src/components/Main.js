@@ -16,7 +16,7 @@ export default function Main() {
 
     function addTask(event) {
         event.preventDefault()
-        
+
         setTasks(oldTasks => ([
             {
                 id: nanoid(),
@@ -79,7 +79,7 @@ export default function Main() {
                     <div className="card">
                         <div className="card-body p-5">
 
-                            <form className="d-flex justify-content-center align-items-center mb-4">
+                            <form className="d-flex mb-4">
                                 <input type="text" className="form-control form-control-lg"
                                     placeholder="What do you need to do today?" name="newTask" onChange={handleChange} value={newTask} />
 

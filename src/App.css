@@ -1,21 +1,20 @@
+
 nav {
   color: whitesmoke;
   background-color: #20232a;
+  align-items: center;
   height: 70px;
   display: flex;
   padding: 10px 10px;
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.2);
 }
 
-.inputTask {
-  margin: 20px;
+.nav-img {
+  width: 80px;
 }
 
-.btnAddTask {
-  background-color: #20232a;
-  border-radius: 5px;
-  color: white;
-  margin: 20px 20px 20px 0px;
+nav, main {
+  min-width: 300px;
 }
 
 .delete-btn {
